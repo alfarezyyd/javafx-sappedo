@@ -15,8 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Objects;
@@ -40,7 +44,10 @@ public class Bicycle {
   @FXML
   public TextField inputStock;
   private final ObservableList<BicycleModel> bicycleObservableList = FXCollections.observableArrayList();
+  @FXML
+  public ImageView imagePreview;
   private Integer bicycleId;
+  private String imagePath;
   int counterInc = 1;
 
   @FXML
@@ -61,6 +68,9 @@ public class Bicycle {
         inputPrice.setText(String.valueOf(selectedBicycle.getPrice()));
         inputStock.setText(String.valueOf(selectedBicycle.getStock()));
         bicycleId = selectedBicycle.getModelId();
+        File file = new File(String.valueOf(selectedBicycle.getImagePath()));
+        Image image = new Image(file.toURI().toString());
+        imagePreview.setImage(image);
       }
     });
 
@@ -80,7 +90,8 @@ public class Bicycle {
         int price = resultSet.getInt("price");
         int stock = resultSet.getInt("stock");
         int id = resultSet.getInt("id");
-        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock, id);
+        String imagePath = resultSet.getString("image_path");
+        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock, id, imagePath);
         bicycleObservableList.add(bicycle);
         counterInc++;
       }
@@ -95,6 +106,9 @@ public class Bicycle {
     String name = inputName.getText().trim();
     String priceText = inputPrice.getText().trim();
     String stockText = inputStock.getText().trim();
+    if (imagePath == null) {
+      CommonHelper.showAlert("Error", "Tolong upload gambar terlebih dahulu", Alert.AlertType.ERROR);
+    }
     if (name.isEmpty() || priceText.isEmpty() || stockText.isEmpty()) {
       CommonHelper.showAlert("Error", "Semua kolom wajib terisi", Alert.AlertType.ERROR);
       return;
@@ -103,10 +117,11 @@ public class Bicycle {
     try (Connection connection = AppConnection.getConnection()) {
       price = Integer.parseInt(priceText);
       stock = Integer.parseInt(stockText);
-      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock, image_path) VALUES (?,?,?, ?)", Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, price);
       preparedStatement.setInt(3, stock);
+      preparedStatement.setString(4, imagePath);
       int i = preparedStatement.executeUpdate();
       ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
       if (i > 0) {
@@ -115,7 +130,7 @@ public class Bicycle {
           bicycleId = generatedKeys.getInt(1);
         }
         // Tambahkan data baru ke dalam ObservableList
-        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId);
+        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath);
         bicycleObservableList.add(newBicycle);
 
         // Perbarui TableView
@@ -142,13 +157,17 @@ public class Bicycle {
     }
     int price, stock;
     try (Connection connection = AppConnection.getConnection()) {
+      if (imagePath == null) {
+        CommonHelper.showAlert("Error", "Tolong upload gambar terlebih dahulu", Alert.AlertType.ERROR);
+      }
       price = Integer.parseInt(priceText);
       stock = Integer.parseInt(stockText);
-      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE bicycles SET name = ?, price = ?, stock = ? WHERE id = ?");
+      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE bicycles SET name = ?, price = ?, stock = ?, image_path = ? WHERE id = ?");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, price);
       preparedStatement.setInt(3, stock);
-      preparedStatement.setInt(4, bicycleId);
+      preparedStatement.setString(4, imagePath);
+      preparedStatement.setInt(5, bicycleId);
       int i = preparedStatement.executeUpdate();
       System.out.println(name);
       System.out.println(price);
@@ -156,9 +175,9 @@ public class Bicycle {
       System.out.println(bicycleId);
       if (i > 0) {
         CommonHelper.showAlert("Success", "Data sepeda berhasil diupdate", Alert.AlertType.INFORMATION);
-        BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId);
+        BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath);
 
-       for (int index = 0; index < bicycleObservableList.size(); index++) {
+        for (int index = 0; index < bicycleObservableList.size(); index++) {
           if (bicycleObservableList.get(index).getId().equals(bicycleId)) {
             // Perbarui item di ObservableList
             bicycleObservableList.set(index, updatedBicycle);
@@ -229,5 +248,25 @@ public class Bicycle {
     Scene scene = new Scene(fxmlLoader.load());
     bicycleStage.setScene(scene);
     bicycleStage.show();
+  }
+
+  public void handleUploadImage(ActionEvent actionEvent) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Image File");
+
+    // Filter file untuk hanya menampilkan file gambar
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
+    fileChooser.getExtensionFilters().add(extFilter);
+
+    // Buka dialog untuk memilih file
+    Stage stage = (Stage) imagePreview.getScene().getWindow();
+    File file = fileChooser.showOpenDialog(stage);
+
+    if (file != null) {
+      // Jika file dipilih, buat objek Image dan atur ke ImageView
+      Image image = new Image(file.toURI().toString());
+      imagePreview.setImage(image);
+      this.imagePath = file.getAbsolutePath();
+    }
   }
 }

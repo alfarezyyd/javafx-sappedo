@@ -6,12 +6,15 @@ public class BicycleModel {
   private Integer price;
   private Integer stock;
   private Integer modelId;
-  public BicycleModel(Integer id, String name, Integer price, Integer stock, Integer modelId) {
+  private String imagePath;
+
+  public BicycleModel(Integer id, String name, Integer price, Integer stock, Integer modelId, String imagePath) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.stock = stock;
     this.modelId = modelId;
+    this.imagePath = imagePath;
   }
 
   public Integer getId() {
@@ -32,5 +35,9 @@ public class BicycleModel {
 
   public Integer getModelId() {
     return modelId;
+  }
+
+  public String getImagePath() {
+    return imagePath;
   }
 }

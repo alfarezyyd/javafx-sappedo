@@ -36,15 +36,15 @@
                </font>
             </Label>
             <Line endX="315.0635986328125" layoutX="124.0" layoutY="55.0" startX="-124.00000762939453" />
-            <TextField fx:id="inputName" layoutX="30.0" layoutY="130.0" prefHeight="27.0" prefWidth="194.0">
+            <TextField fx:id="inputName" layoutX="34.0" layoutY="102.0" prefHeight="27.0" prefWidth="194.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding></TextField>
-            <TextField fx:id="inputPrice" layoutX="32.0" layoutY="213.0" prefHeight="27.0" prefWidth="191.0">
+            <TextField fx:id="inputPrice" layoutX="36.0" layoutY="176.0" prefHeight="27.0" prefWidth="191.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding></TextField>
-            <TextField fx:id="inputStock" layoutX="34.0" layoutY="301.0" prefHeight="27.0" prefWidth="188.0">
+            <TextField fx:id="inputStock" layoutX="37.0" layoutY="247.0" prefHeight="27.0" prefWidth="188.0">
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding></TextField>
@@ -52,15 +52,15 @@
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Button>
-            <Label layoutX="29.0" layoutY="98.0" text="Nama">
+            <Label layoutX="33.0" layoutY="74.0" text="Nama">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label layoutX="32.0" layoutY="276.0" text="Stock">
+            <Label layoutX="36.0" layoutY="222.0" text="Stock">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Label layoutX="31.0" layoutY="183.0" text="Harga">
+            <Label layoutX="35.0" layoutY="149.0" text="Harga">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -75,16 +75,13 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <ImageView fitHeight="278.0" fitWidth="186.0" layoutX="245.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/anime.jpg" />
-               </image>
-            </ImageView>
-            <Label layoutX="313.0" layoutY="381.0" text="CASHIER">
+            <ImageView fx:id="imagePreview" fitHeight="278.0" fitWidth="186.0" layoutX="245.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="313.0" layoutY="381.0" text="PREVIEW">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Button layoutX="38.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="26.0" prefWidth="191.0" text="Upload Gambar Produk" />
          </children>
       </Pane>
       <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleBackIntoMenu" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">
