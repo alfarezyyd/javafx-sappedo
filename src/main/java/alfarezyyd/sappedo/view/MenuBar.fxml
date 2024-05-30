@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfarezyyd.sappedo.controller.MenuBar">
+   <children>
+      <ImageView fitHeight="650.0" fitWidth="1000.0" layoutX="-34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/background_menu.jpeg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="159.0" layoutY="97.0" prefHeight="307.0" prefWidth="685.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+         <children>
+            <AnchorPane layoutX="70.0" layoutY="39.0">
+               <children>
+                  <ImageView fitHeight="121.0" fitWidth="137.0" layoutY="10.0" onMouseClicked="#routeBicycle" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/bicycle.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="9.0" layoutY="128.0" text="Manajemen Data">
+                     <font>
+                        <Font name="Ayuthaya" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="157.0" text="Produk Sepeda">
+                     <font>
+                        <Font name="Ayuthaya" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="276.0" layoutY="57.0">
+               <children>
+                  <ImageView fitHeight="99.0" fitWidth="89.0" layoutX="12.0" layoutY="8.0" onMouseClicked="#routeTransaction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/mobile-payment.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutY="112.0" text="Manajemen Data">
+                     <font>
+                        <Font name="Ayuthaya" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="5.0" layoutY="141.0" text="Transaction">
+                     <font>
+                        <Font name="Ayuthaya" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

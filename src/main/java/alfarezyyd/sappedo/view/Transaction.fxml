@@ -113,7 +113,7 @@
                 </Label>
             </children>
         </Pane>
-        <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleSubmitTransaction" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">
+        <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleBackIntoMenu" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

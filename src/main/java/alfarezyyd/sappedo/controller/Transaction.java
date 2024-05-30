@@ -7,11 +7,17 @@ import alfarezyyd.sappedo.model.TransactionModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -302,4 +308,14 @@ public class Transaction {
     }
   }
 
+  public void handleBackIntoMenu(ActionEvent actionEvent) throws IOException {
+    Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    loginStage.hide();
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MenuBar.fxml"));
+    Stage bicycleStage = new Stage();
+    bicycleStage.setTitle("Menu Bar");
+    Scene scene = new Scene(fxmlLoader.load());
+    bicycleStage.setScene(scene);
+    bicycleStage.show();
+  }
 }

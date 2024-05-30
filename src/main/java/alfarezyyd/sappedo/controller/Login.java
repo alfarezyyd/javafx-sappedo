@@ -30,9 +30,9 @@ public class Login {
       if (resultSet.next()) {
         Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         loginStage.hide();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Transaction.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("MenuBar.fxml"));
         Stage bicycleStage = new Stage();
-        bicycleStage.setTitle("Semua Sepeda");
+        bicycleStage.setTitle("Menu Bar");
         Scene scene = new Scene(fxmlLoader.load());
         bicycleStage.setScene(scene);
         bicycleStage.show();
