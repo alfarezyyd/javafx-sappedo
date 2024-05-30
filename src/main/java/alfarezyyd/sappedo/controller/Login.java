@@ -3,10 +3,12 @@ package alfarezyyd.sappedo.controller;
 import alfarezyyd.sappedo.AppConnection;
 import alfarezyyd.sappedo.helper.CommonHelper;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,7 +20,7 @@ import java.sql.SQLException;
 
 public class Login {
 
-  public TextField passwordInput;
+  public PasswordField passwordInput;
   public TextField usernameInput;
 
   public void handleLogin(ActionEvent actionEvent) {
