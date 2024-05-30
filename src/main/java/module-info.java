@@ -11,6 +11,8 @@ module alfarezyyd.sappedo {
   requires eu.hansolo.tilesfx;
   requires javafx.graphics;
   requires atlantafx.base;
+  requires mysql.connector.j;
+  requires java.sql;
 
   opens alfarezyyd.sappedo to javafx.fxml;
   opens alfarezyyd.sappedo.controller to javafx.fxml;
