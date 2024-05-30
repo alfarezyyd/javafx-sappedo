@@ -33,4 +33,15 @@ public class MenuBar {
     bicycleStage.setScene(scene);
     bicycleStage.show();
   }
+
+  public void handleLogout(MouseEvent mouseEvent) throws IOException {
+     Stage loginStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+    loginStage.hide();
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+    Stage bicycleStage = new Stage();
+    bicycleStage.setTitle("Login");
+    Scene scene = new Scene(fxmlLoader.load());
+    bicycleStage.setScene(scene);
+    bicycleStage.show();
+  }
 }
