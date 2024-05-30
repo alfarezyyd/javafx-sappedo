@@ -10,7 +10,10 @@ module alfarezyyd.sappedo {
   requires org.kordamp.bootstrapfx.core;
   requires eu.hansolo.tilesfx;
   requires javafx.graphics;
+  requires atlantafx.base;
 
   opens alfarezyyd.sappedo to javafx.fxml;
+  opens alfarezyyd.sappedo.controller to javafx.fxml;
   exports alfarezyyd.sappedo;
+  exports alfarezyyd.sappedo.controller;
 }
