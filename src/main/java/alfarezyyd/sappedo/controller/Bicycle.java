@@ -18,10 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Objects;
 
 public class Bicycle {
@@ -63,7 +60,7 @@ public class Bicycle {
         inputName.setText(selectedBicycle.getName());
         inputPrice.setText(String.valueOf(selectedBicycle.getPrice()));
         inputStock.setText(String.valueOf(selectedBicycle.getStock()));
-        bicycleId = selectedBicycle.getId();
+        bicycleId = selectedBicycle.getModelId();
       }
     });
 
@@ -82,8 +79,8 @@ public class Bicycle {
         String name = resultSet.getString("name");
         int price = resultSet.getInt("price");
         int stock = resultSet.getInt("stock");
-
-        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock);
+        int id = resultSet.getInt("id");
+        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock, id);
         bicycleObservableList.add(bicycle);
         counterInc++;
       }
@@ -106,15 +103,19 @@ public class Bicycle {
     try (Connection connection = AppConnection.getConnection()) {
       price = Integer.parseInt(priceText);
       stock = Integer.parseInt(stockText);
-      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock) VALUES (?,?,?)");
+      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, price);
       preparedStatement.setInt(3, stock);
       int i = preparedStatement.executeUpdate();
+      ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
       if (i > 0) {
         CommonHelper.showAlert("Success", "Data sepeda berhasil ditambahkan", Alert.AlertType.INFORMATION);
+        if (generatedKeys.next()) {
+          bicycleId = generatedKeys.getInt(1);
+        }
         // Tambahkan data baru ke dalam ObservableList
-        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock);
+        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId);
         bicycleObservableList.add(newBicycle);
 
         // Perbarui TableView
@@ -149,19 +150,21 @@ public class Bicycle {
       preparedStatement.setInt(3, stock);
       preparedStatement.setInt(4, bicycleId);
       int i = preparedStatement.executeUpdate();
+      System.out.println(name);
+      System.out.println(price);
+      System.out.println(stock);
+      System.out.println(bicycleId);
       if (i > 0) {
         CommonHelper.showAlert("Success", "Data sepeda berhasil diupdate", Alert.AlertType.INFORMATION);
-        BicycleModel updatedBicycle = new BicycleModel(bicycleId, name, price, stock);
+        BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId);
 
-        // Dapatkan indeks item yang akan diperbarui
-        int index = bicycleObservableList.indexOf(updatedBicycle);
-
-        // Hapus item lama dari ObservableList
-        bicycleObservableList.remove(index);
-
-        // Tambahkan item yang diperbarui kembali ke dalam ObservableList pada indeks yang sama
-        bicycleObservableList.add(index, updatedBicycle);
-
+       for (int index = 0; index < bicycleObservableList.size(); index++) {
+          if (bicycleObservableList.get(index).getId().equals(bicycleId)) {
+            // Perbarui item di ObservableList
+            bicycleObservableList.set(index, updatedBicycle);
+            break;
+          }
+        }
         // Perbarui TableView
         tableViewBicycle.refresh();
       } else {
@@ -192,7 +195,7 @@ public class Bicycle {
         // Dapatkan indeks item yang akan dihapus
         int index = -1;
         for (int j = 0; j < bicycleObservableList.size(); j++) {
-          if (Objects.equals(bicycleObservableList.get(j).getId(), bicycleId)) {
+          if (Objects.equals(bicycleObservableList.get(j).getModelId(), bicycleId)) {
             index = j;
             break;
           }

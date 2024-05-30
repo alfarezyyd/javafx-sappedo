@@ -142,7 +142,7 @@ public class Transaction {
         int price = resultSet.getInt("price");
         int stock = resultSet.getInt("stock");
 
-        BicycleModel bicycle = new BicycleModel(id, name, price, stock);
+        BicycleModel bicycle = new BicycleModel(id, name, price, stock, id);
         bicycleObservableList.add(bicycle);
       }
 
@@ -171,7 +171,7 @@ public class Transaction {
         int bicyclePrice = resultSet.getInt("bicyclePrice");
         int bicycleStock = resultSet.getInt("bicycleStock");
 
-        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock);
+        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId);
         TransactionModel transaction = new TransactionModel(counterInc++, name, bicycle, quantity, totalPrice, payment);
         transactionObservableList.add(transaction);
       }
