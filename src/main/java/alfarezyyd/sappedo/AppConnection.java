@@ -10,16 +10,17 @@ public class AppConnection {
   private static final String jdbcUrl = "jdbc:mysql://localhost:3306/javafx_sappedo";
   private static Driver mysqlDriver;
 
-  static {
+
+  public static Connection getConnection() throws SQLException {
+    return DriverManager.getConnection(AppConnection.jdbcUrl, "root", "");
+  }
+
+  public static void initializeConnection() {
     try {
       AppConnection.mysqlDriver = new com.mysql.cj.jdbc.Driver();
       DriverManager.registerDriver(AppConnection.mysqlDriver);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(AppConnection.jdbcUrl, "root", "");
   }
 }

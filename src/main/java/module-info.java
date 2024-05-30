@@ -13,9 +13,12 @@ module alfarezyyd.sappedo {
   requires atlantafx.base;
   requires mysql.connector.j;
   requires java.sql;
+  requires jdk.jconsole;
 
   opens alfarezyyd.sappedo to javafx.fxml;
   opens alfarezyyd.sappedo.controller to javafx.fxml;
+  opens alfarezyyd.sappedo.model to javafx.fxml;
   exports alfarezyyd.sappedo;
   exports alfarezyyd.sappedo.controller;
+  exports alfarezyyd.sappedo.model;
 }

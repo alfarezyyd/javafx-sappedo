@@ -7,17 +7,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Launcher extends Application {
   @Override
   public void start(Stage stage) throws IOException, SQLException {
-    Connection connection = AppConnection.getConnection();
+    AppConnection.initializeConnection();
     Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-    FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("Login.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setTitle("Aplikasi Sappedo!");
     stage.setScene(scene);

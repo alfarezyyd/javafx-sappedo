@@ -141,5 +141,10 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java/alfarezyyd/sappedo/view</directory>
+            </resource>
+        </resources>
     </build>
 </project>
