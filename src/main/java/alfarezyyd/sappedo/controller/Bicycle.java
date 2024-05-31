@@ -169,10 +169,6 @@ public class Bicycle {
       preparedStatement.setString(4, imagePath);
       preparedStatement.setInt(5, bicycleId);
       int i = preparedStatement.executeUpdate();
-      System.out.println(name);
-      System.out.println(price);
-      System.out.println(stock);
-      System.out.println(bicycleId);
       if (i > 0) {
         CommonHelper.showAlert("Success", "Data sepeda berhasil diupdate", Alert.AlertType.INFORMATION);
         BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath);
@@ -202,7 +198,6 @@ public class Bicycle {
     try (Connection connection = AppConnection.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM bicycles WHERE id = ?");
       preparedStatement.setInt(1, bicycleId);
-      System.out.println(bicycleId);
       if (bicycleId == null) {
         CommonHelper.showAlert("Error", "Pilih data terlebih dahulu", Alert.AlertType.ERROR);
         return;

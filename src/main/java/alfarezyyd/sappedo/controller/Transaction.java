@@ -238,7 +238,6 @@ public class Transaction {
       quantity = Integer.parseInt(quantityText);
       totalPrice = Integer.parseInt(totalPriceText);
       payment = Integer.parseInt(paymentText);
-      System.out.print(transactionId);
       PreparedStatement preparedStatement = connection.prepareStatement("UPDATE transactions SET name = ?, bicycle_id = ?, quantity = ?, total_price = ?, payment = ? WHERE id = ?");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, selectedBicycle.getId());
