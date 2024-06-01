@@ -3,7 +3,7 @@ package alfarezyyd.sappedo.controller;
 
 import alfarezyyd.sappedo.AppConnection;
 import alfarezyyd.sappedo.EventListener;
-import alfarezyyd.sappedo.Main;
+import alfarezyyd.sappedo.Launcher;
 import alfarezyyd.sappedo.helper.CommonHelper;
 import alfarezyyd.sappedo.model.BicycleModel;
 import javafx.collections.FXCollections;
@@ -80,7 +80,7 @@ public class Market implements Initializable {
 
   private void setChosenBicycle(BicycleModel bicycleModel) {
     bicycleNameLabel.setText(bicycleModel.getName());
-    bicyclePriceLabel.setText(Main.CURRENCY + bicycleModel.getPrice());
+    bicyclePriceLabel.setText(Launcher.CURRENCY + bicycleModel.getPrice());
     File file = new File(String.valueOf(bicycleModel.getImagePath()));
     bicycleImage = new Image(file.toURI().toString());
     bicycleImg.setImage(bicycleImage);

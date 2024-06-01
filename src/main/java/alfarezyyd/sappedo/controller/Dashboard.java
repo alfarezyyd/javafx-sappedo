@@ -1,8 +1,10 @@
 package alfarezyyd.sappedo.controller;
 
 import alfarezyyd.sappedo.AppConnection;
+import alfarezyyd.sappedo.Launcher;
 import alfarezyyd.sappedo.helper.CommonHelper;
 import alfarezyyd.sappedo.model.BicycleModel;
+import alfarezyyd.sappedo.model.LoggedUserModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,18 @@ public class Dashboard {
   public HBox hboxProduct;
   @FXML
   public HBox hboxHome;
+  @FXML
+  public Label soldProduct;
+  @FXML
+  public Label revenueLabel;
+  @FXML
+  public Label soldProductMonth;
+  @FXML
+  public Label revenueLabelMonth;
+  @FXML
+  public ImageView avatarUser;
+  @FXML
+  public Label nameLabel;
 
   @FXML
   private Label dateNow;
@@ -102,7 +117,7 @@ public class Dashboard {
     currentStage.show();
   }
 
-  private void setProductInfo(ImageView imageView, Label nameLabel, Label priceLabel, Label totalOrderLabel, BicycleModel bicycleModel) {
+  private void setProductInfo(ImageView imageView, Label nameLabel, Label priceLabel, BicycleModel bicycleModel) {
     File file = new File(String.valueOf(bicycleModel.getImagePath()));
     Image image = new Image(file.toURI().toString());
 
@@ -162,29 +177,42 @@ public class Dashboard {
     int totalTransactions = getTotalTransactions();
     int totalUsers = getTotalUsers();
 
+    soldProduct.setText(Launcher.CURRENCY + " " + calculateProductsSold(false));
+    revenueLabel.setText(Launcher.CURRENCY + " " + calculateRevenue(true));
+    soldProductMonth.setText(Launcher.CURRENCY + " " + calculateProductsSold(false));
+    revenueLabelMonth.setText(Launcher.CURRENCY + " " + calculateRevenue(true));
+
     // Ambil 5 produk terbaik dari database
     List<BicycleModel> topProducts = getTopProductsFromDatabase();
 
     if (!topProducts.isEmpty()) {
-      setProductInfo(firstProductImage, firstProductName, firstProductPrice, firstProductTotalOrder, topProducts.getFirst());
+      setProductInfo(firstProductImage, firstProductName, firstProductPrice, topProducts.getFirst());
     }
     if (topProducts.size() > 1) {
-      setProductInfo(secondProductImage, secondProductName, secondProductPrice, secondProductTotalOrder, topProducts.get(1));
+      setProductInfo(secondProductImage, secondProductName, secondProductPrice, topProducts.get(1));
     }
     if (topProducts.size() > 2) {
-      setProductInfo(thirdProductImage, thirdProductName, thirdProductPrice, thirdProductTotalOrder, topProducts.get(2));
+      setProductInfo(thirdProductImage, thirdProductName, thirdProductPrice, topProducts.get(2));
     }
     if (topProducts.size() > 3) {
-      setProductInfo(fourthProductImage, fourthProductName, fourthProductPrice, fourthProductTotalOrder, topProducts.get(3));
+      setProductInfo(fourthProductImage, fourthProductName, fourthProductPrice, topProducts.get(3));
     }
     if (topProducts.size() > 4) {
-      setProductInfo(fifthProductImage, fifthProductName, fifthProductPrice, fifthProductTotalOrder, topProducts.get(4));
+      setProductInfo(fifthProductImage, fifthProductName, fifthProductPrice, topProducts.get(4));
     }
 
     // Set data total produk, total transaksi, dan total pengguna
     totalProduct.setText(String.valueOf(totalProducts));
     totalTransaction.setText(String.valueOf(totalTransactions));
     totalUser.setText(String.valueOf(totalUsers));
+    LoggedUserModel loggedUserModel = LoggedUserModel.getInstance();
+
+    if (loggedUserModel.isLoggedIn()) {
+      nameLabel.setText("Halo, " + loggedUserModel.getFullName());
+      File file = new File(String.valueOf(loggedUserModel.getAvatar()));
+      Image image = new Image(file.toURI().toString());
+      avatarUser.setImage(image);
+    }
   }
 
   // Metode untuk mendapatkan total produk dari database
@@ -270,6 +298,74 @@ public class Dashboard {
       CommonHelper.showAlert("Error", "Aplikasi mengalamai error tidak terduga", Alert.AlertType.ERROR);
       return 0;
     }
+  }
+
+  private int calculateProductsSold(boolean isMonth) {
+    int productsSold = 0;
+    String querySql = null;
+    LocalDate localDate = LocalDate.now();
+    String format = null;
+    // Jika hanya ingin menghitung per hari
+    if (!isMonth) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      format = localDate.format(formatter);
+      querySql = "SELECT SUM(quantity) AS total_sold FROM transactions WHERE date = ?";
+    }
+    // Jika ingin menghitung per bulan
+    else {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+      format = localDate.format(formatter);
+      querySql = "SELECT SUM(quantity) AS total_sold FROM transactions WHERE DATE_FORMAT(date, '%Y-%m') = ?";
+    }
+
+    try (Connection connection = AppConnection.getConnection();
+         PreparedStatement preparedStatement = connection.prepareStatement(querySql)) {
+
+      preparedStatement.setString(1, format);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        productsSold = resultSet.getInt("total_sold");
+      }
+    } catch (SQLException e) {
+      CommonHelper.showAlert("Error", "Aplikasi mengalamai error tidak terduga", Alert.AlertType.ERROR);
+    }
+
+    return productsSold;
+  }
+
+  private int calculateRevenue(boolean isMonth) {
+    int revenueToday = 0;
+    String querySql = null;
+    LocalDate localDate = LocalDate.now();
+    String format = null;
+    // Jika hanya ingin menghitung per hari
+    if (!isMonth) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      format = localDate.format(formatter);
+      querySql = "SELECT SUM(total_price) AS total_price FROM transactions WHERE date = ?";
+    }
+    // Jika ingin menghitung per bulan
+    else {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+      format = localDate.format(formatter);
+      querySql = "SELECT SUM(total_price) AS total_price FROM transactions WHERE DATE_FORMAT(date, '%Y-%m') = ?";
+    }
+
+
+    try (Connection connection = AppConnection.getConnection()) {
+      PreparedStatement preparedStatement = connection.prepareStatement(querySql);
+      preparedStatement.setString(1, format);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        revenueToday = resultSet.getInt("total_price");
+      }
+    } catch (SQLException e) {
+      CommonHelper.showAlert("Error", "Aplikasi mengalamai error tidak terduga", Alert.AlertType.ERROR);
+    }
+
+    return revenueToday;
   }
 
 }

@@ -2,6 +2,7 @@ package alfarezyyd.sappedo.controller;
 
 import alfarezyyd.sappedo.AppConnection;
 import alfarezyyd.sappedo.helper.CommonHelper;
+import alfarezyyd.sappedo.model.LoggedUserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +39,9 @@ public class Login {
         Scene scene = new Scene(fxmlLoader.load());
         bicycleStage.setScene(scene);
         bicycleStage.show();
+
+        LoggedUserModel loggedUserModel = LoggedUserModel.getInstance();
+        loggedUserModel.setUser(resultSet.getString("username"), resultSet.getString("full_name"), resultSet.getString("avatar"));
       } else {
         CommonHelper.showAlert("Login Gagal", "Silahkan Cek Username dan Password Anda", Alert.AlertType.ERROR);
       }

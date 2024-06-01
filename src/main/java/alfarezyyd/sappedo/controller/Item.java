@@ -1,7 +1,7 @@
 package alfarezyyd.sappedo.controller;
 
 import alfarezyyd.sappedo.EventListener;
-import alfarezyyd.sappedo.Main;
+import alfarezyyd.sappedo.Launcher;
 import alfarezyyd.sappedo.model.BicycleModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -33,7 +33,7 @@ public class Item {
     this.bicycleModel = bicycleModel;
     this.eventListener = eventListener;
     bicycleNameLabel.setText(bicycleModel.getName());
-    bicyclePriceLabel.setText(Main.CURRENCY + bicycleModel.getPrice());
+    bicyclePriceLabel.setText(Launcher.CURRENCY + bicycleModel.getPrice());
     File file = new File(String.valueOf(bicycleModel.getImagePath()));
     imageView.setImage(new Image(file.toURI().toString()));
   }

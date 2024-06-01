@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Launcher extends Application {
+  public static final String CURRENCY = "Rp. ";
+
   @Override
   public void start(Stage stage) throws IOException, SQLException {
+
     AppConnection.initializeConnection();
     Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Dashboard.fxml"));
