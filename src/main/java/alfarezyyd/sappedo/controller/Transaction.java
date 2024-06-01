@@ -90,7 +90,6 @@ public class Transaction {
         inputTotalPrice.setText(String.valueOf(selectedTransaction.getTotalPrice()));
         comboBoxProduct.setValue(selectedTransaction.getBicycleModel());
         File file = new File(String.valueOf(selectedTransaction.getBicycleModel().getImagePath()));
-        System.out.println(selectedTransaction.getBicycleModel().getImagePath());
         imagePreview.setImage(new Image(file.toURI().toString()));
       }
     });
