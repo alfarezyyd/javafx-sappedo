@@ -1,108 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alfarezyyd.sappedo.controller.Dashboard">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0"
+            prefWidth="1315.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="alfarezyyd.sappedo.controller.Dashboard">
     <left>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="5.0" style="-fx-background-color: white; -fx-border-color: #6F6F6F; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="5.0"
+              style="-fx-background-color: white; -fx-border-color: #6F6F6F; -fx-border-width: 0 1 0 0;"
+              BorderPane.alignment="CENTER">
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
                     <children>
                         <ImageView fitHeight="48.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/dashboard.png" />
+                                <Image url="@images/dashboard.png"/>
                             </image>
                         </ImageView>
                         <Label prefHeight="48.0" prefWidth="174.0" text="Dashboard">
                             <font>
-                                <Font name="System Bold" size="19.0" />
+                                <Font name="System Bold" size="19.0"/>
                             </font>
                         </Label>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets left="20.0" right="20.0"/>
                     </padding>
                 </HBox>
-            <HBox fx:id="hboxHome" alignment="CENTER_LEFT" onMouseClicked="#routeHome" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/home.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label prefHeight="49.0" prefWidth="152.0" text="  Beranda">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </HBox>
-                <HBox fx:id="hboxProduct" alignment="CENTER_LEFT" onMouseClicked="#routeProduct" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
+                <HBox fx:id="hboxHome" alignment="CENTER_LEFT" onMouseClicked="#routeHome" prefHeight="45.0"
+                      prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/home.png"/>
+                            </image>
+                            <HBox.margin>
+                                <Insets left="5.0"/>
+                            </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="49.0" prefWidth="152.0" text="  Beranda">
+                            <font>
+                                <Font size="16.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets left="20.0" right="20.0"/>
+                    </padding>
+                </HBox>
+                <HBox fx:id="hboxProduct" alignment="CENTER_LEFT" onMouseClicked="#routeProduct" prefHeight="45.0"
+                      prefWidth="200.0" spacing="20.0">
                     <children>
                         <ImageView fitHeight="48.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/bicycle-icon.png" />
+                                <Image url="@images/bicycle-icon.png"/>
                             </image>
                         </ImageView>
                         <Label prefHeight="49.0" prefWidth="152.0" text="Produk">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </Label>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets left="20.0" right="20.0"/>
                     </padding>
                 </HBox>
-                <HBox fx:id="hboxOrder" alignment="CENTER_LEFT" onMouseClicked="#routeOrder" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
+                <HBox fx:id="hboxOrder" alignment="CENTER_LEFT" onMouseClicked="#routeOrder" prefHeight="45.0"
+                      prefWidth="200.0" spacing="20.0">
                     <children>
                         <ImageView fitHeight="48.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/icon-order.png" />
+                                <Image url="@images/icon-order.png"/>
                             </image>
                         </ImageView>
                         <Label prefHeight="49.0" prefWidth="152.0" text="Transaksi">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </Label>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets left="20.0" right="20.0"/>
                     </padding>
                 </HBox>
-                <HBox fx:id="hboxUser" alignment="CENTER_LEFT" onMouseClicked="#routeUser" prefHeight="45.0" prefWidth="200.0" spacing="20.0">
+                <HBox fx:id="hboxUser" alignment="CENTER_LEFT" onMouseClicked="#routeUser" prefHeight="45.0"
+                      prefWidth="200.0" spacing="20.0">
                     <children>
                         <ImageView fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/user.png" />
+                                <Image url="@images/user.png"/>
                             </image>
                             <HBox.margin>
-                                <Insets left="5.0" />
+                                <Insets left="5.0"/>
                             </HBox.margin>
                         </ImageView>
                         <Label prefHeight="49.0" prefWidth="152.0" text="Pengguna">
                             <font>
-                                <Font size="16.0" />
+                                <Font size="16.0"/>
                             </font>
                         </Label>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets left="20.0" right="20.0"/>
                     </padding>
                 </HBox>
             </children>
@@ -113,12 +116,13 @@
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="1065.0" style="-fx-background-color: white;">
                     <children>
-                        <Pane prefHeight="55.0" prefWidth="305.0" HBox.hgrow="ALWAYS" />
+                        <Pane prefHeight="55.0" prefWidth="305.0" HBox.hgrow="ALWAYS"/>
                         <HBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="250.0">
                             <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="238.0" text="Hello, Budi Saranjana" textAlignment="CENTER">
+                                <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="238.0"
+                                       text="Hello, Budi Saranjana" textAlignment="CENTER">
                                     <font>
-                                        <Font size="19.0" />
+                                        <Font size="19.0"/>
                                     </font>
                                 </Label>
                             </children>
@@ -127,128 +131,145 @@
                             <children>
                                 <ImageView fitHeight="40.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@images/dashboard.png" />
+                                        <Image url="@images/dashboard.png"/>
                                     </image>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
+                                    <HBox.margin>
+                                        <Insets right="10.0"/>
+                                    </HBox.margin>
                                 </ImageView>
                             </children>
                         </HBox>
                     </children>
                 </HBox>
-                <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: #EFF2F6;" VBox.vgrow="ALWAYS">
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-color: #EFF2F6;"
+                      VBox.vgrow="ALWAYS">
                     <children>
                         <VBox spacing="20.0">
                             <children>
                                 <Label text="Dashboard">
                                     <font>
-                                        <Font name="System Bold" size="20.0" />
+                                        <Font name="System Bold" size="20.0"/>
                                     </font>
                                 </Label>
                                 <HBox prefHeight="120.0" prefWidth="200.0" spacing="20.0">
                                     <children>
-                                        <VBox prefHeight="200.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                        <VBox prefHeight="200.0" prefWidth="240.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;">
                                             <children>
                                                 <HBox alignment="CENTER" prefHeight="53.0" prefWidth="240.0">
                                                     <children>
-                                                        <Label prefHeight="23.0" prefWidth="183.0" text="Products">
+                                                        <Label prefHeight="23.0" prefWidth="264.0" text="Tanggal">
                                                             <font>
-                                                                <Font size="18.0" />
+                                                                <Font size="18.0"/>
                                                             </font>
                                                         </Label>
-                                                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                        <Pane prefHeight="200.0" prefWidth="200.0"/>
+                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/dashboard.png" />
+                                                                <Image url="@images/dashboard.png"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </HBox>
-                                                <Label prefHeight="67.0" prefWidth="239.0" text="10">
+                                                <Label fx:id="dateNow" prefHeight="67.0" prefWidth="239.0" text="10">
                                                     <font>
-                                                        <Font name="System Bold" size="30.0" />
+                                                        <Font name="System Bold" size="30.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                                             </padding>
                                         </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="240.0" style="-fx-background-color: #EC505C; -fx-background-radius: 10;">
+                                        <VBox prefHeight="200.0" prefWidth="240.0"
+                                              style="-fx-background-color: #EC505C; -fx-background-radius: 10;">
                                             <children>
                                                 <HBox alignment="CENTER" prefHeight="53.0" prefWidth="240.0">
                                                     <children>
-                                                        <Label prefHeight="23.0" prefWidth="183.0" text="Products" textFill="WHITE">
+                                                        <Label prefHeight="23.0" prefWidth="253.0" text="Total Produk"
+                                                               textFill="WHITE">
                                                             <font>
-                                                                <Font size="18.0" />
+                                                                <Font size="18.0"/>
                                                             </font>
                                                         </Label>
-                                                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                                                        <Pane prefHeight="200.0" prefWidth="200.0">
+                                                            <children>
+                                                                <ImageView fitHeight="35.0" fitWidth="35.0"
+                                                                           layoutX="41.0" layoutY="-4.0"
+                                                                           pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@images/dashboard.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                            </children>
+                                                        </Pane>
                                                     </children>
                                                 </HBox>
-                                                <Label prefHeight="67.0" prefWidth="239.0" text="10" textFill="WHITE">
+                                                <Label fx:id="totalProduct" prefHeight="67.0" prefWidth="239.0"
+                                                       text="10" textFill="WHITE">
                                                     <font>
-                                                        <Font name="System Bold" size="30.0" />
+                                                        <Font name="System Bold" size="30.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                                             </padding>
                                         </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                        <VBox prefHeight="200.0" prefWidth="240.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;">
                                             <children>
                                                 <HBox alignment="CENTER" prefHeight="53.0" prefWidth="240.0">
                                                     <children>
-                                                        <Label prefHeight="23.0" prefWidth="183.0" text="Products">
+                                                        <Label prefHeight="23.0" prefWidth="301.0"
+                                                               text="Total Transaksi">
                                                             <font>
-                                                                <Font size="18.0" />
+                                                                <Font size="18.0"/>
                                                             </font>
                                                         </Label>
-                                                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                        <Pane prefHeight="200.0" prefWidth="200.0"/>
+                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                                                                   preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/dashboard.png" />
+                                                                <Image url="@images/dashboard.png"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </HBox>
-                                                <Label prefHeight="67.0" prefWidth="239.0" text="10">
+                                                <Label fx:id="totalTransaction" prefHeight="67.0" prefWidth="239.0"
+                                                       text="10">
                                                     <font>
-                                                        <Font name="System Bold" size="30.0" />
+                                                        <Font name="System Bold" size="30.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                                             </padding>
                                         </VBox>
-                                        <VBox prefHeight="200.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                        <VBox prefHeight="200.0" prefWidth="240.0"
+                                              style="-fx-background-color: white; -fx-background-radius: 10;">
                                             <children>
                                                 <HBox alignment="CENTER" prefHeight="53.0" prefWidth="240.0">
                                                     <children>
-                                                        <Label prefHeight="23.0" prefWidth="183.0" text="Products">
+                                                        <Label prefHeight="23.0" prefWidth="284.0"
+                                                               text="Total Pengguna">
                                                             <font>
-                                                                <Font size="18.0" />
+                                                                <Font size="18.0"/>
                                                             </font>
                                                         </Label>
-                                                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                            <image>
-                                                                <Image url="@images/dashboard.png" />
-                                                            </image>
-                                                        </ImageView>
+                                                        <Pane prefHeight="200.0" prefWidth="200.0"/>
                                                     </children>
                                                 </HBox>
-                                                <Label prefHeight="67.0" prefWidth="239.0" text="10">
+                                                <Label fx:id="totalUser" prefHeight="67.0" prefWidth="239.0" text="10">
                                                     <font>
-                                                        <Font name="System Bold" size="30.0" />
+                                                        <Font name="System Bold" size="30.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
                                             </padding>
                                         </VBox>
                                     </children>
@@ -257,266 +278,269 @@
                         </VBox>
                         <VBox prefHeight="290.0" prefWidth="100.0" spacing="20.0">
                             <children>
-                                <Label text="Dashboard">
+                                <Label prefHeight="24.0" prefWidth="145.0" text="Produk Terbaik">
                                     <font>
-                                        <Font size="19.0" />
+                                        <Font size="19.0"/>
                                     </font>
                                 </Label>
-                                <HBox prefHeight="270.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                <HBox prefHeight="270.0" prefWidth="200.0" spacing="20.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;">
                                     <children>
                                         <VBox prefHeight="175.0" prefWidth="190.0">
                                             <HBox.margin>
-                                                <Insets />
+                                                <Insets/>
                                             </HBox.margin>
                                             <children>
-                                                <Pane prefHeight="130.0" prefWidth="190.0" style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
+                                                <Pane prefHeight="130.0" prefWidth="190.0"
+                                                      style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
                                                     <children>
-                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0"
+                                                                   pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/anime.jpg" />
+                                                                <Image url="@images/anime.jpg"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </Pane>
                                                 <Label prefHeight="28.0" prefWidth="190.0" text="Product Name">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font name="System Bold" size="16.0"/>
                                                     </font>
                                                     <VBox.margin>
-                                                        <Insets top="20.0" />
+                                                        <Insets top="20.0"/>
                                                     </VBox.margin>
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
-                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name" textFill="#6f6f6f">
+                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name"
+                                                       textFill="#6f6f6f">
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
                                             </children>
                                         </VBox>
                                         <VBox prefHeight="175.0" prefWidth="190.0">
                                             <children>
-                                                <Pane prefHeight="130.0" prefWidth="190.0" style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
+                                                <Pane prefHeight="130.0" prefWidth="190.0"
+                                                      style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
                                                     <children>
-                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0"
+                                                                   pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/anime.jpg" />
+                                                                <Image url="@images/anime.jpg"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </Pane>
                                                 <Label prefHeight="28.0" prefWidth="190.0" text="Product Name">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font name="System Bold" size="16.0"/>
                                                     </font>
                                                     <VBox.margin>
-                                                        <Insets top="20.0" />
+                                                        <Insets top="20.0"/>
                                                     </VBox.margin>
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
-                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name" textFill="#6f6f6f">
+                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name"
+                                                       textFill="#6f6f6f">
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
                                             </children>
                                         </VBox>
                                         <VBox prefHeight="175.0" prefWidth="190.0">
                                             <children>
-                                                <Pane prefHeight="130.0" prefWidth="190.0" style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
+                                                <Pane prefHeight="130.0" prefWidth="190.0"
+                                                      style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
                                                     <children>
-                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0"
+                                                                   pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/anime.jpg" />
+                                                                <Image url="@images/anime.jpg"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </Pane>
                                                 <Label prefHeight="28.0" prefWidth="190.0" text="Product Name">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font name="System Bold" size="16.0"/>
                                                     </font>
                                                     <VBox.margin>
-                                                        <Insets top="20.0" />
+                                                        <Insets top="20.0"/>
                                                     </VBox.margin>
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
-                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name" textFill="#6f6f6f">
+                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name"
+                                                       textFill="#6f6f6f">
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
                                             </children>
                                         </VBox>
                                         <VBox prefHeight="175.0" prefWidth="190.0">
                                             <children>
-                                                <Pane prefHeight="130.0" prefWidth="190.0" style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
+                                                <Pane prefHeight="130.0" prefWidth="190.0"
+                                                      style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
                                                     <children>
-                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0"
+                                                                   pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/anime.jpg" />
+                                                                <Image url="@images/anime.jpg"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </Pane>
                                                 <Label prefHeight="28.0" prefWidth="190.0" text="Product Name">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font name="System Bold" size="16.0"/>
                                                     </font>
                                                     <VBox.margin>
-                                                        <Insets top="20.0" />
+                                                        <Insets top="20.0"/>
                                                     </VBox.margin>
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
-                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name" textFill="#6f6f6f">
+                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name"
+                                                       textFill="#6f6f6f">
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
                                             </children>
                                         </VBox>
                                         <VBox prefHeight="175.0" prefWidth="190.0">
                                             <children>
-                                                <Pane prefHeight="130.0" prefWidth="190.0" style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
+                                                <Pane prefHeight="130.0" prefWidth="190.0"
+                                                      style="-fx-background-color: #FDDB87; -fx-background-radius: 10;">
                                                     <children>
-                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0" pickOnBounds="true" preserveRatio="true">
+                                                        <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="51.0"
+                                                                   pickOnBounds="true" preserveRatio="true">
                                                             <image>
-                                                                <Image url="@images/anime.jpg" />
+                                                                <Image url="@images/anime.jpg"/>
                                                             </image>
                                                         </ImageView>
                                                     </children>
                                                 </Pane>
                                                 <Label prefHeight="28.0" prefWidth="190.0" text="Product Name">
                                                     <font>
-                                                        <Font name="System Bold" size="16.0" />
+                                                        <Font name="System Bold" size="16.0"/>
                                                     </font>
                                                     <VBox.margin>
-                                                        <Insets top="20.0" />
+                                                        <Insets top="20.0"/>
                                                     </VBox.margin>
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
-                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name" textFill="#6f6f6f">
+                                                <Label prefHeight="15.0" prefWidth="190.0" text="Product Name"
+                                                       textFill="#6f6f6f">
                                                     <padding>
-                                                        <Insets left="10.0" />
+                                                        <Insets left="10.0"/>
                                                     </padding>
                                                 </Label>
                                             </children>
                                         </VBox>
                                     </children>
                                     <padding>
-                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                                     </padding>
                                 </HBox>
                             </children>
                         </VBox>
                         <HBox prefHeight="170.0" prefWidth="200.0" spacing="20.0">
                             <children>
-                                <VBox prefHeight="200.0" prefWidth="490.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                <VBox prefHeight="200.0" prefWidth="490.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;">
                                     <children>
-                                        <Label prefHeight="23.0" prefWidth="183.0" text="Products">
+                                        <Label prefHeight="23.0" prefWidth="183.0" text="Penjualan Hari Ini">
                                             <font>
-                                                <Font size="18.0" />
+                                                <Font size="18.0"/>
                                             </font>
                                         </Label>
                                         <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="470.0">
                                             <children>
-                                                <Label prefHeight="23.0" prefWidth="122.0" text="Di">
+                                                <Label prefHeight="23.0" prefWidth="122.0" text="Produk Terjual">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="18.0"/>
                                                     </font>
                                                 </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                                                 <Label prefHeight="23.0" prefWidth="104.0" text="Products">
                                                     <font>
-                                                        <Font name="System Bold" size="18.0" />
+                                                        <Font name="System Bold" size="18.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <VBox.margin>
-                                                <Insets top="10.0" />
+                                                <Insets top="10.0"/>
                                             </VBox.margin>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="470.0">
                                             <children>
-                                                <Label prefHeight="23.0" prefWidth="122.0" text="Di">
+                                                <Label prefHeight="23.0" prefWidth="122.0" text="Penghasilan ">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="18.0"/>
                                                     </font>
                                                 </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                                                 <Label prefHeight="23.0" prefWidth="104.0" text="Products">
                                                     <font>
-                                                        <Font name="System Bold" size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="470.0">
-                                            <children>
-                                                <Label prefHeight="23.0" prefWidth="122.0" text="Di">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                                <Label prefHeight="23.0" prefWidth="104.0" text="Products">
-                                                    <font>
-                                                        <Font name="System Bold" size="18.0" />
+                                                        <Font name="System Bold" size="18.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                         </HBox>
                                     </children>
                                     <padding>
-                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                     </padding>
                                 </VBox>
-                                <VBox prefHeight="200.0" prefWidth="490.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                                <VBox prefHeight="200.0" prefWidth="490.0"
+                                      style="-fx-background-color: white; -fx-background-radius: 10;">
                                     <children>
                                         <Label prefHeight="23.0" prefWidth="183.0" text="Products">
                                             <font>
-                                                <Font size="18.0" />
+                                                <Font size="18.0"/>
                                             </font>
                                         </Label>
                                         <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="470.0">
                                             <children>
                                                 <Label prefHeight="23.0" prefWidth="122.0" text="Di">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="18.0"/>
                                                     </font>
                                                 </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                                                 <Label prefHeight="23.0" prefWidth="104.0" text="Products">
                                                     <font>
-                                                        <Font name="System Bold" size="18.0" />
+                                                        <Font name="System Bold" size="18.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                             <VBox.margin>
-                                                <Insets top="10.0" />
+                                                <Insets top="10.0"/>
                                             </VBox.margin>
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="470.0">
                                             <children>
                                                 <Label prefHeight="23.0" prefWidth="122.0" text="Di">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="18.0"/>
                                                     </font>
                                                 </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                                                 <Label prefHeight="23.0" prefWidth="104.0" text="Products">
                                                     <font>
-                                                        <Font name="System Bold" size="18.0" />
+                                                        <Font name="System Bold" size="18.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
@@ -525,27 +549,27 @@
                                             <children>
                                                 <Label prefHeight="23.0" prefWidth="122.0" text="Di">
                                                     <font>
-                                                        <Font size="18.0" />
+                                                        <Font size="18.0"/>
                                                     </font>
                                                 </Label>
-                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                                                 <Label prefHeight="23.0" prefWidth="104.0" text="Products">
                                                     <font>
-                                                        <Font name="System Bold" size="18.0" />
+                                                        <Font name="System Bold" size="18.0"/>
                                                     </font>
                                                 </Label>
                                             </children>
                                         </HBox>
                                     </children>
                                     <padding>
-                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                                     </padding>
                                 </VBox>
                             </children>
                         </HBox>
                     </children>
                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
                     </padding>
                 </VBox>
             </children>
