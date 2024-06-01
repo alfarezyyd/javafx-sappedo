@@ -116,7 +116,7 @@
                         <Pane prefHeight="55.0" prefWidth="305.0" HBox.hgrow="ALWAYS" />
                         <HBox maxHeight="-Infinity" prefHeight="35.0" prefWidth="250.0">
                             <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="238.0" text="Hallo, Budi Saranjana" textAlignment="CENTER">
+                                <Label alignment="CENTER_RIGHT" prefHeight="33.0" prefWidth="238.0" text="Hello, Budi Saranjana" textAlignment="CENTER">
                                     <font>
                                         <Font size="19.0" />
                                     </font>
@@ -125,10 +125,13 @@
                         </HBox>
                         <HBox alignment="CENTER">
                             <children>
-                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="40.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@images/dashboard.png" />
                                     </image>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
                                 </ImageView>
                             </children>
                         </HBox>
