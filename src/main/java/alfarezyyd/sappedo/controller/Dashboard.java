@@ -45,6 +45,8 @@ public class Dashboard {
   public ImageView avatarUser;
   @FXML
   public Label nameLabel;
+  @FXML
+  public HBox logoutButton;
 
   @FXML
   private Label dateNow;
@@ -368,4 +370,14 @@ public class Dashboard {
     return revenueToday;
   }
 
+  public void handleLoginAction(MouseEvent mouseEvent) throws IOException {
+    Stage loginStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+    loginStage.hide();
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+    Stage bicycleStage = new Stage();
+    bicycleStage.setTitle("Login");
+    Scene scene = new Scene(fxmlLoader.load());
+    bicycleStage.setScene(scene);
+    bicycleStage.show();
+  }
 }

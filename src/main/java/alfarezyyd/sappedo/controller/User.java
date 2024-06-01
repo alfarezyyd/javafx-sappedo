@@ -19,10 +19,15 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class User {
   @FXML
@@ -110,11 +115,24 @@ public class User {
       return;
     }
 
+
+    byte[] hashedPassword = null;
+    try {
+      SecureRandom random = new SecureRandom();
+      byte[] salt = new byte[16];
+      random.nextBytes(salt);
+      MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+      messageDigest.update(salt);
+      hashedPassword = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+    } catch (NoSuchAlgorithmException e) {
+      CommonHelper.showAlert("Error", "Terjadi error yang tidak terduga", Alert.AlertType.ERROR);
+    }
     try (Connection connection = AppConnection.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (username, full_name, password, avatar) VALUES (?, ?, ?, ?)");
       preparedStatement.setString(1, username);
       preparedStatement.setString(2, fullName);
-      preparedStatement.setString(3, password);
+      preparedStatement.setString(3, Arrays.toString(hashedPassword));
       preparedStatement.setString(4, userAvatar);
       int i = preparedStatement.executeUpdate();
       if (i > 0) {

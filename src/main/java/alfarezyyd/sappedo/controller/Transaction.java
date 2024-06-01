@@ -242,10 +242,16 @@ public class Transaction {
       preparedStatement.setInt(6, payment);
       int i = preparedStatement.executeUpdate();
       if (i > 0) {
-        CommonHelper.showAlert("Success", "Transaksi berhasil ditambahkan", Alert.AlertType.INFORMATION);
-        TransactionModel newTransaction = new TransactionModel(counterInc++, dateText, name, selectedBicycle, quantity, totalPrice, payment);
-        transactionObservableList.add(newTransaction);
-        tableViewTransaction.refresh();
+        PreparedStatement bicyclePreparedStatement = connection.prepareStatement("UPDATE bicycles SET stock = ? WHERE id = ?");
+        bicyclePreparedStatement.setInt(1, selectedBicycle.getStock() - 1);
+        bicyclePreparedStatement.setInt(2, selectedBicycle.getId());
+        int j = bicyclePreparedStatement.executeUpdate();
+        if (j > 0) {
+          CommonHelper.showAlert("Success", "Transaksi berhasil ditambahkan", Alert.AlertType.INFORMATION);
+          TransactionModel newTransaction = new TransactionModel(counterInc++, dateText, name, selectedBicycle, quantity, totalPrice, payment);
+          transactionObservableList.add(newTransaction);
+          tableViewTransaction.refresh();
+        }
       } else {
         CommonHelper.showAlert("Error", "Transaksi gagal ditambahkan", Alert.AlertType.ERROR);
       }

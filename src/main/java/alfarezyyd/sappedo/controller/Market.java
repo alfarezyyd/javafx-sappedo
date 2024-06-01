@@ -37,6 +37,8 @@ import java.util.ResourceBundle;
 
 public class Market implements Initializable {
   @FXML
+  public Label bicycleStockLabel;
+  @FXML
   private VBox chosenBicycleCard;
 
   @FXML
@@ -84,6 +86,7 @@ public class Market implements Initializable {
     File file = new File(String.valueOf(bicycleModel.getImagePath()));
     bicycleImage = new Image(file.toURI().toString());
     bicycleImg.setImage(bicycleImage);
+    bicycleStockLabel.setText(String.valueOf(bicycleModel.getStock()));
     chosenBicycleCard.setStyle("-fx-background-color: #" + "FB5D03" + ";\n" +
         "    -fx-background-radius: 30;");
   }
