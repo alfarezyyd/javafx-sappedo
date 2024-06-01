@@ -87,7 +87,6 @@ public class Transaction {
       }
     });
 
-
     loadBicyclesFromDatabase();
 
     // Mengatur cell factory dan button cell untuk comboBoxProduct
@@ -126,9 +125,28 @@ public class Transaction {
         return null; // Not needed for this implementation
       }
     });
+
+    // Listener untuk perubahan quantity
+    inputQuantity.textProperty().addListener((observable, oldValue, newValue) -> updateTotalPrice());
+
     loadTransactionsFromDatabase();
   }
 
+  // Metode untuk memperbarui total harga
+  private void updateTotalPrice() {
+    try {
+      BicycleModel selectedBicycle = comboBoxProduct.getValue();
+      if (selectedBicycle != null) {
+        int price = selectedBicycle.getPrice();
+        int quantity = Integer.parseInt(inputQuantity.getText());
+        int totalPrice = price * quantity;
+        inputTotalPrice.setText(String.valueOf(totalPrice));
+      }
+    } catch (NumberFormatException e) {
+      // Jika quantity bukan angka yang valid, kosongkan totalPrice
+      inputTotalPrice.clear();
+    }
+  }
 
   private void loadBicyclesFromDatabase() {
     try (Connection connection = AppConnection.getConnection()) {
@@ -199,6 +217,10 @@ public class Transaction {
       quantity = Integer.parseInt(quantityText);
       totalPrice = Integer.parseInt(totalPriceText);
       payment = Integer.parseInt(paymentText);
+      if (totalPrice > payment) {
+        CommonHelper.showAlert("Error", "Pembayaran kurang dari total harga", Alert.AlertType.ERROR);
+        return;
+      }
       PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO transactions (name, bicycle_id, quantity, total_price, payment) VALUES (?,?,?,?,?)");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, selectedBicycle.getId());
@@ -238,6 +260,10 @@ public class Transaction {
       quantity = Integer.parseInt(quantityText);
       totalPrice = Integer.parseInt(totalPriceText);
       payment = Integer.parseInt(paymentText);
+      if (totalPrice > payment) {
+        CommonHelper.showAlert("Error", "Pembayaran kurang dari total harga", Alert.AlertType.ERROR);
+        return;
+      }
       PreparedStatement preparedStatement = connection.prepareStatement("UPDATE transactions SET name = ?, bicycle_id = ?, quantity = ?, total_price = ?, payment = ? WHERE id = ?");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, selectedBicycle.getId());
