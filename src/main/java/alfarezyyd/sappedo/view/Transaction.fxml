@@ -85,7 +85,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Button>
-                <ImageView fx:id="imagePreview" fitHeight="261.0" fitWidth="186.0" layoutX="244.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="imagePreview" fitHeight="261.0" fitWidth="186.0" layoutX="244.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true" />
                 <Label layoutX="315.0" layoutY="422.0" text="Preview">
                     <font>
                         <Font name="System Bold" size="13.0" />
@@ -107,7 +107,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-            <DatePicker fx:id="inputDate" editable="false" layoutX="244.0" layoutY="91.0" />
+            <DatePicker fx:id="inputDate" editable="false" layoutX="245.0" layoutY="89.0" prefHeight="26.0" prefWidth="165.0" />
             <Label layoutX="244.0" layoutY="66.0" text="Tanggal Pembelian">
                <font>
                   <Font name="System Bold" size="13.0" />

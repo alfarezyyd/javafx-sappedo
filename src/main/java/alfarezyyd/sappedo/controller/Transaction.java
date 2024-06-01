@@ -14,10 +14,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -87,6 +89,9 @@ public class Transaction {
         inputPayment.setText(String.valueOf(selectedTransaction.getPayment()));
         inputTotalPrice.setText(String.valueOf(selectedTransaction.getTotalPrice()));
         comboBoxProduct.setValue(selectedTransaction.getBicycleModel());
+        File file = new File(String.valueOf(selectedTransaction.getBicycleModel().getImagePath()));
+        System.out.println(selectedTransaction.getBicycleModel().getImagePath());
+        imagePreview.setImage(new Image(file.toURI().toString()));
       }
     });
 
@@ -175,8 +180,10 @@ public class Transaction {
   @FXML
   private void loadTransactionsFromDatabase() {
     try (Connection connection = AppConnection.getConnection()) {
-      String query = "SELECT t.id, t.date, t.name, t.quantity, t.total_price, t.payment, b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock " +
-          "FROM transactions t JOIN bicycles b ON t.bicycle_id = b.id";
+      String query = """
+             SELECT t.id, t.date, t.name, t.quantity, t.total_price, t.payment,\s
+          b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock, b.image_path AS bicycleImagePath \s
+                       FROM transactions t JOIN bicycles b ON t.bicycle_id = b.id""";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -192,8 +199,9 @@ public class Transaction {
         String bicycleName = resultSet.getString("bicycleName");
         int bicyclePrice = resultSet.getInt("bicyclePrice");
         int bicycleStock = resultSet.getInt("bicycleStock");
+        String bicycleImagePath = resultSet.getString("bicycleImagePath");
 
-        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId, null);
+        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId, bicycleImagePath);
         TransactionModel transaction = new TransactionModel(id, date, name, bicycle, quantity, totalPrice, payment);
         transactionObservableList.add(transaction);
       }
