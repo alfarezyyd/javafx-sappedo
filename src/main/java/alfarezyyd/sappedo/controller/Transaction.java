@@ -7,6 +7,7 @@ import alfarezyyd.sappedo.model.TransactionModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Transaction {
@@ -362,5 +364,15 @@ public class Transaction {
     Scene scene = new Scene(fxmlLoader.load());
     bicycleStage.setScene(scene);
     bicycleStage.show();
+  }
+
+  public void handlePrint(ActionEvent actionEvent) {
+    Task<Void> printTask = new Task<>() {
+      @Override
+      protected Void call() throws Exception {
+        HashMap hashMap = new HashMap();
+        return null;
+      }
+    }
   }
 }

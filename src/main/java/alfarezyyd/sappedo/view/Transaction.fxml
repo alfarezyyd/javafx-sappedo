@@ -22,7 +22,7 @@
                 <Image url="@images/background.jpg" />
             </image>
         </ImageView>
-        <TableView fx:id="tableViewTransaction" layoutX="484.0" layoutY="55.0" prefHeight="510.0" prefWidth="475.0" style="-fx-background-radius: 10;">
+        <TableView fx:id="tableViewTransaction" layoutX="484.0" layoutY="55.0" prefHeight="468.0" prefWidth="475.0" style="-fx-background-radius: 10;">
             <columns>
                 <TableColumn fx:id="columnDate" prefWidth="50.5" text="Tanggal" />
                 <TableColumn fx:id="columnName" prefWidth="104.0" text="Nama Pelanggan" />
@@ -120,5 +120,10 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
+      <Button layoutX="478.0" layoutY="541.0" mnemonicParsing="false" onAction="#handlePrint" prefHeight="26.0" prefWidth="142.0" text="Print">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
