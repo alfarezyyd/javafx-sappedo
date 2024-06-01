@@ -16,6 +16,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class User {
   @FXML
@@ -246,5 +251,19 @@ public class User {
     Scene scene = new Scene(fxmlLoader.load());
     bicycleStage.setScene(scene);
     bicycleStage.show();
+  }
+
+  public void handlePrintAction(ActionEvent actionEvent) {
+    JasperPrint jasperPrint;
+    try {
+      jasperPrint = JasperFillManager.fillReport("report/UserReport.jasper",
+          new HashMap<>(),
+          AppConnection.getConnection());
+      JasperViewer jasperViewer = new JasperViewer(jasperPrint, true);
+      jasperViewer.setTitle("Laporan Data Pengguna");
+      jasperViewer.setVisible(true);
+    } catch (JRException | SQLException e) {
+      CommonHelper.showAlert("Error", "Aplikasi mengalami error: " + e.getMessage(), Alert.AlertType.ERROR);
+    }
   }
 }

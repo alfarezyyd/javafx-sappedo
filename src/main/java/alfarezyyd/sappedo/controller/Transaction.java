@@ -7,7 +7,6 @@ import alfarezyyd.sappedo.model.TransactionModel;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.File;
 import java.io.IOException;
@@ -366,13 +369,17 @@ public class Transaction {
     bicycleStage.show();
   }
 
-  public void handlePrint(ActionEvent actionEvent) {
-    Task<Void> printTask = new Task<>() {
-      @Override
-      protected Void call() throws Exception {
-        HashMap hashMap = new HashMap();
-        return null;
-      }
+  public void handlePrintAction(ActionEvent actionEvent) {
+    JasperPrint jasperPrint;
+    try {
+      jasperPrint = JasperFillManager.fillReport("report/TransactionReport.jasper",
+          new HashMap<>(),
+          AppConnection.getConnection());
+      JasperViewer jasperViewer = new JasperViewer(jasperPrint, true);
+      jasperViewer.setTitle("Laporan Data Pengguna");
+      jasperViewer.setVisible(true);
+    } catch (JRException | SQLException e) {
+      CommonHelper.showAlert("Error", "Aplikasi mengalami error: " + e.getMessage(), Alert.AlertType.ERROR);
     }
   }
 }

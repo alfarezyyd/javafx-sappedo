@@ -120,7 +120,7 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-      <Button layoutX="478.0" layoutY="541.0" mnemonicParsing="false" onAction="#handlePrint" prefHeight="26.0" prefWidth="142.0" text="Print">
+      <Button layoutX="478.0" layoutY="541.0" mnemonicParsing="false" onAction="#handlePrintAction" prefHeight="26.0" prefWidth="142.0" text="Print">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

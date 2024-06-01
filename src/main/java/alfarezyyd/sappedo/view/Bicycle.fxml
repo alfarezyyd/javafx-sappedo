@@ -20,12 +20,12 @@
             <Image url="@images/background.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="tableViewBicycle" layoutX="499.0" layoutY="51.0" prefHeight="514.0" prefWidth="434.0" style="-fx-background-radius: 10;">
+      <TableView fx:id="tableViewBicycle" layoutX="499.0" layoutY="51.0" prefHeight="475.0" prefWidth="453.0" style="-fx-background-radius: 10;">
         <columns>
           <TableColumn fx:id="columnId" prefWidth="44.151519775390625" text="#" />
           <TableColumn fx:id="columnName" prefWidth="188.25714111328125" text="Nama" />
           <TableColumn fx:id="columnPrice" prefWidth="131.24285888671875" text="Harga" />
-          <TableColumn fx:id="columnStock" prefWidth="70.47918701171875" text="Stock" />
+          <TableColumn fx:id="columnStock" prefWidth="87.5" text="Stock" />
         </columns>
       </TableView>
       <Pane layoutX="28.0" layoutY="100.0" prefHeight="468.0" prefWidth="444.0" style="-fx-background-color: white; -fx-background-radius: 10;">
@@ -85,6 +85,11 @@
          </children>
       </Pane>
       <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleBackIntoMenu" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="499.0" layoutY="542.0" mnemonicParsing="false" onAction="#handlePrintAction" prefHeight="26.0" prefWidth="142.0" text="Print">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

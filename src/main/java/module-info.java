@@ -14,6 +14,7 @@ module alfarezyyd.sappedo {
   requires mysql.connector.j;
   requires java.sql;
   requires jdk.jconsole;
+  requires jasperreports;
 
   opens alfarezyyd.sappedo to javafx.fxml;
   opens alfarezyyd.sappedo.controller to javafx.fxml;
