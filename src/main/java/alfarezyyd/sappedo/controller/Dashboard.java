@@ -262,7 +262,6 @@ public class Dashboard {
       PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM users");
       ResultSet resultSet = preparedStatement.executeQuery();
       if (resultSet.next()) {
-        System.out.println(resultSet.getInt(1));
         return resultSet.getInt(1);
       } else {
         return 0;

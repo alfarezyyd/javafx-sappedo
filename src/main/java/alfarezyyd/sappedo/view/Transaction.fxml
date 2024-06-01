@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -23,12 +24,12 @@
         </ImageView>
         <TableView fx:id="tableViewTransaction" layoutX="484.0" layoutY="55.0" prefHeight="510.0" prefWidth="475.0" style="-fx-background-radius: 10;">
             <columns>
-                <TableColumn fx:id="columnId" prefWidth="44.151519775390625" text="#" />
-                <TableColumn fx:id="columnName" prefWidth="103.63714599609375" text="Nama Pelanggan" />
-                <TableColumn fx:id="columnProduct" prefWidth="104.36285400390625" text="Produk Sepeda" />
-                <TableColumn fx:id="columnQuantity" minWidth="0.0" prefWidth="0.0" text="Kuantitas" />
-                <TableColumn fx:id="columnTotalPrice" prefWidth="77.2093505859375" text="Total Harga" />
-                <TableColumn fx:id="columnPayment" prefWidth="98.7906494140625" text="Pembayaran" />
+                <TableColumn fx:id="columnDate" prefWidth="50.5" text="Tanggal" />
+                <TableColumn fx:id="columnName" prefWidth="104.0" text="Nama Pelanggan" />
+                <TableColumn fx:id="columnProduct" prefWidth="107.5" text="Produk Sepeda" />
+                <TableColumn fx:id="columnQuantity" minWidth="0.0" prefWidth="59.0" text="Kuantitas" />
+                <TableColumn fx:id="columnTotalPrice" prefWidth="69.5" text="Total Harga" />
+                <TableColumn fx:id="columnPayment" prefWidth="83.0" text="Pembayaran" />
             </columns>
         </TableView>
         <Pane layoutX="28.0" layoutY="99.0" prefHeight="468.0" prefWidth="444.0" style="-fx-background-color: white; -fx-background-radius: 10;">
@@ -84,12 +85,8 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Button>
-                <ImageView fitHeight="278.0" fitWidth="186.0" layoutX="242.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@images/anime.jpg" />
-                    </image>
-                </ImageView>
-                <Label layoutX="313.0" layoutY="381.0" text="CASHIER">
+                <ImageView fx:id="imagePreview" fitHeight="261.0" fitWidth="186.0" layoutX="244.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+                <Label layoutX="315.0" layoutY="422.0" text="Preview">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
@@ -110,6 +107,12 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
+            <DatePicker fx:id="inputDate" editable="false" layoutX="244.0" layoutY="91.0" />
+            <Label layoutX="244.0" layoutY="66.0" text="Tanggal Pembelian">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
         <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleBackIntoMenu" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">

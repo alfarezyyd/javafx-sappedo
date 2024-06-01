@@ -79,7 +79,6 @@ public class Market implements Initializable {
   }
 
   private void setChosenBicycle(BicycleModel bicycleModel) {
-    System.out.print(bicycleModel);
     bicycleNameLabel.setText(bicycleModel.getName());
     bicyclePriceLabel.setText(Main.CURRENCY + bicycleModel.getPrice());
     File file = new File(String.valueOf(bicycleModel.getImagePath()));

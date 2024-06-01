@@ -14,14 +14,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Transaction {
@@ -29,7 +28,7 @@ public class Transaction {
   @FXML
   public TableView<TransactionModel> tableViewTransaction;
   @FXML
-  public TableColumn<TransactionModel, Integer> columnId;
+  public TableColumn<TransactionModel, String> columnDate;
   @FXML
   public TableColumn<TransactionModel, String> columnName;
   @FXML
@@ -49,24 +48,28 @@ public class Transaction {
   @FXML
   public TextField inputPayment;
   @FXML
+  public DatePicker inputDate;
+  @FXML
   public ComboBox<BicycleModel> comboBoxProduct;
 
 
   private final ObservableList<BicycleModel> bicycleObservableList = FXCollections.observableArrayList();
   private final ObservableList<TransactionModel> transactionObservableList = FXCollections.observableArrayList();
+  @FXML
+  public ImageView imagePreview;
   private Integer transactionId;
-  private Integer bicycleId;
   int counterInc = 1;
 
   @FXML
   public void initialize() {
-    columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+    columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
     columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
     columnProduct.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBicycleModel().getName()));
     columnQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     columnTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
     columnPayment.setCellValueFactory(new PropertyValueFactory<>("payment"));
 
+    inputDate.setValue(LocalDate.now());
     tableViewTransaction.setItems(transactionObservableList);
     comboBoxProduct.setItems(bicycleObservableList);
 
@@ -102,7 +105,7 @@ public class Transaction {
       }
     });
 
-    comboBoxProduct.setButtonCell(new ListCell<BicycleModel>() {
+    comboBoxProduct.setButtonCell(new ListCell<>() {
       @Override
       protected void updateItem(BicycleModel item, boolean empty) {
         super.updateItem(item, empty);
@@ -114,7 +117,7 @@ public class Transaction {
       }
     });
 
-    comboBoxProduct.setConverter(new StringConverter<BicycleModel>() {
+    comboBoxProduct.setConverter(new StringConverter<>() {
       @Override
       public String toString(BicycleModel object) {
         return object != null ? object.getName() : "";
@@ -172,13 +175,14 @@ public class Transaction {
   @FXML
   private void loadTransactionsFromDatabase() {
     try (Connection connection = AppConnection.getConnection()) {
-      String query = "SELECT t.id, t.name, t.quantity, t.total_price, t.payment, b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock " +
+      String query = "SELECT t.id, t.date, t.name, t.quantity, t.total_price, t.payment, b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock " +
           "FROM transactions t JOIN bicycles b ON t.bicycle_id = b.id";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
-        int id = resultSet.getInt("id");
+        Integer id = resultSet.getInt("id");
+        String date = String.valueOf(resultSet.getDate("date"));
         String name = resultSet.getString("name");
         int quantity = resultSet.getInt("quantity");
         int totalPrice = resultSet.getInt("total_price");
@@ -190,7 +194,7 @@ public class Transaction {
         int bicycleStock = resultSet.getInt("bicycleStock");
 
         BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId, null);
-        TransactionModel transaction = new TransactionModel(counterInc++, name, bicycle, quantity, totalPrice, payment);
+        TransactionModel transaction = new TransactionModel(id, date, name, bicycle, quantity, totalPrice, payment);
         transactionObservableList.add(transaction);
       }
 
@@ -206,6 +210,7 @@ public class Transaction {
     String quantityText = inputQuantity.getText().trim();
     String totalPriceText = inputTotalPrice.getText().trim();
     String paymentText = inputPayment.getText().trim();
+    String dateText = inputDate.getValue().toString().trim();
 
     if (name.isEmpty() || selectedBicycle.getName().isEmpty() || quantityText.isEmpty() || totalPriceText.isEmpty() || paymentText.isEmpty()) {
       CommonHelper.showAlert("Error", "Semua kolom wajib terisi", Alert.AlertType.ERROR);
@@ -221,16 +226,17 @@ public class Transaction {
         CommonHelper.showAlert("Error", "Pembayaran kurang dari total harga", Alert.AlertType.ERROR);
         return;
       }
-      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO transactions (name, bicycle_id, quantity, total_price, payment) VALUES (?,?,?,?,?)");
-      preparedStatement.setString(1, name);
-      preparedStatement.setInt(2, selectedBicycle.getId());
-      preparedStatement.setInt(3, quantity);
-      preparedStatement.setInt(4, totalPrice);
-      preparedStatement.setInt(5, payment);
+      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO transactions (date, name, bicycle_id, quantity, total_price, payment) VALUES (?,?,?,?,?,?)");
+      preparedStatement.setDate(1, Date.valueOf(dateText));
+      preparedStatement.setString(2, name);
+      preparedStatement.setInt(3, selectedBicycle.getId());
+      preparedStatement.setInt(4, quantity);
+      preparedStatement.setInt(5, totalPrice);
+      preparedStatement.setInt(6, payment);
       int i = preparedStatement.executeUpdate();
       if (i > 0) {
         CommonHelper.showAlert("Success", "Transaksi berhasil ditambahkan", Alert.AlertType.INFORMATION);
-        TransactionModel newTransaction = new TransactionModel(counterInc++, name, selectedBicycle, quantity, totalPrice, payment);
+        TransactionModel newTransaction = new TransactionModel(counterInc++, dateText, name, selectedBicycle, quantity, totalPrice, payment);
         transactionObservableList.add(newTransaction);
         tableViewTransaction.refresh();
       } else {
@@ -249,6 +255,7 @@ public class Transaction {
     String quantityText = inputQuantity.getText().trim();
     String totalPriceText = inputTotalPrice.getText().trim();
     String paymentText = inputPayment.getText().trim();
+    String dateText = inputDate.toString().trim();
 
     if (name.isEmpty() || quantityText.isEmpty() || totalPriceText.isEmpty() || paymentText.isEmpty()) {
       CommonHelper.showAlert("Error", "Semua kolom wajib terisi", Alert.AlertType.ERROR);
@@ -264,7 +271,7 @@ public class Transaction {
         CommonHelper.showAlert("Error", "Pembayaran kurang dari total harga", Alert.AlertType.ERROR);
         return;
       }
-      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE transactions SET name = ?, bicycle_id = ?, quantity = ?, total_price = ?, payment = ? WHERE id = ?");
+      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE transactions SET  name = ?, bicycle_id = ?, quantity = ?, total_price = ?, payment = ? WHERE id = ?");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, selectedBicycle.getId());
       preparedStatement.setInt(3, quantity);
@@ -275,7 +282,7 @@ public class Transaction {
       if (i > 0) {
         CommonHelper.showAlert("Success", "Transaksi berhasil diupdate", Alert.AlertType.INFORMATION);
 
-        TransactionModel updatedTransaction = new TransactionModel(transactionId, name, selectedBicycle, quantity, totalPrice, payment);
+        TransactionModel updatedTransaction = new TransactionModel(transactionId, dateText, name, selectedBicycle, quantity, totalPrice, payment);
         // Cari item berdasarkan ID transaksi
         for (int index = 0; index < transactionObservableList.size(); index++) {
           if (transactionObservableList.get(index).getId().equals(transactionId)) {
