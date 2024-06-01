@@ -7,6 +7,7 @@ public class BicycleModel {
   private Integer stock;
   private Integer modelId;
   private String imagePath;
+  private String color;
 
   public BicycleModel(Integer id, String name, Integer price, Integer stock, Integer modelId, String imagePath) {
     this.id = id;
@@ -39,5 +40,26 @@ public class BicycleModel {
 
   public String getImagePath() {
     return imagePath;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  @Override
+  public String toString() {
+    return "BicycleModel{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", price=" + price +
+        ", stock=" + stock +
+        ", modelId=" + modelId +
+        ", imagePath='" + imagePath + '\'' +
+        ", color='" + color + '\'' +
+        '}';
   }
 }

@@ -14,7 +14,7 @@ public class Launcher extends Application {
   public void start(Stage stage) throws IOException, SQLException {
     AppConnection.initializeConnection();
     Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Dashboard.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setTitle("Aplikasi Sappedo!");
     stage.setScene(scene);

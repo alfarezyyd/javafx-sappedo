@@ -81,8 +81,8 @@ public class Bicycle {
 
   private void loadDataFromDatabase() {
     try (Connection connection = AppConnection.getConnection()) {
-      String query = "SELECT * FROM bicycles";
-      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      String querySql = "SELECT * FROM bicycles";
+      PreparedStatement preparedStatement = connection.prepareStatement(querySql);
       ResultSet resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {

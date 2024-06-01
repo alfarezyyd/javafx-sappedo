@@ -145,6 +145,9 @@
             <resource>
                 <directory>src/main/java/alfarezyyd/sappedo/view</directory>
             </resource>
+            <resource>
+                <directory>src/main/java/alfarezyyd/sappedo/view/images</directory>
+            </resource>
         </resources>
     </build>
 </project>
