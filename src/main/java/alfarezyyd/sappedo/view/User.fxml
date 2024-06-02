@@ -87,7 +87,7 @@
                     </font>
                 </Label>
             <ImageView fx:id="imagePreview" fitHeight="286.0" fitWidth="188.0" layoutX="242.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="43.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="26.0" prefWidth="166.0" text="Upload Gambar Produk" />
+            <Button layoutX="43.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="26.0" prefWidth="166.0" text="Upload Avatar" />
             <PasswordField fx:id="inputPassword" layoutX="36.0" layoutY="220.0" prefHeight="26.0" prefWidth="189.0">
                <font>
                   <Font size="11.0" />

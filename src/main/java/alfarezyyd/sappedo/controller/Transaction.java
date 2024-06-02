@@ -171,8 +171,7 @@ public class Transaction {
         String name = resultSet.getString("name");
         int price = resultSet.getInt("price");
         int stock = resultSet.getInt("stock");
-
-        BicycleModel bicycle = new BicycleModel(id, name, price, stock, id, null);
+        BicycleModel bicycle = new BicycleModel(id, name, price, stock, id, null, null);
         bicycleObservableList.add(bicycle);
       }
 
@@ -186,7 +185,7 @@ public class Transaction {
     try (Connection connection = AppConnection.getConnection()) {
       String query = """
              SELECT t.id, t.date, t.name, t.quantity, t.total_price, t.payment,\s
-          b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock, b.image_path AS bicycleImagePath \s
+          b.id AS bicycleId, b.name AS bicycleName, b.price AS bicyclePrice, b.stock AS bicycleStock, b.image_path AS bicycleImagePath, b.bg_color AS bicycleBackgroundColor \s
                        FROM transactions t JOIN bicycles b ON t.bicycle_id = b.id""";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       ResultSet resultSet = preparedStatement.executeQuery();
@@ -204,8 +203,9 @@ public class Transaction {
         int bicyclePrice = resultSet.getInt("bicyclePrice");
         int bicycleStock = resultSet.getInt("bicycleStock");
         String bicycleImagePath = resultSet.getString("bicycleImagePath");
+        String bicycleBackgroundColor = resultSet.getString("bicycleBackgroundColor");
 
-        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId, bicycleImagePath);
+        BicycleModel bicycle = new BicycleModel(bicycleId, bicycleName, bicyclePrice, bicycleStock, bicycleId, bicycleImagePath, bicycleBackgroundColor);
         TransactionModel transaction = new TransactionModel(id, date, name, bicycle, quantity, totalPrice, payment);
         transactionObservableList.add(transaction);
       }

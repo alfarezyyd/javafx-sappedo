@@ -4,7 +4,6 @@ import alfarezyyd.sappedo.AppConnection;
 import alfarezyyd.sappedo.helper.CommonHelper;
 import alfarezyyd.sappedo.model.LoggedUserModel;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -31,6 +30,8 @@ public class Login {
       preparedStatement.setString(2, passwordInput.getText());
       ResultSet resultSet = preparedStatement.executeQuery();
       if (resultSet.next()) {
+        LoggedUserModel loggedUserModel = LoggedUserModel.getInstance();
+        loggedUserModel.setUser(resultSet.getString("username"), resultSet.getString("full_name"), resultSet.getString("avatar"), resultSet.getBoolean("is_admin"));
         Stage loginStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         loginStage.hide();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Dashboard.fxml"));
@@ -40,13 +41,12 @@ public class Login {
         bicycleStage.setScene(scene);
         bicycleStage.show();
 
-        LoggedUserModel loggedUserModel = LoggedUserModel.getInstance();
-        loggedUserModel.setUser(resultSet.getString("username"), resultSet.getString("full_name"), resultSet.getString("avatar"));
       } else {
         CommonHelper.showAlert("Login Gagal", "Silahkan Cek Username dan Password Anda", Alert.AlertType.ERROR);
       }
     } catch (SQLException | IOException e) {
-      throw new RuntimeException(e);
+      System.out.print(e.getMessage());
+      CommonHelper.showAlert("Error!", "Aplikasi mengalami error tidak terduga!", Alert.AlertType.ERROR);
     }
 
   }

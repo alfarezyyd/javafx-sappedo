@@ -5,6 +5,7 @@ public class LoggedUserModel {
   private String username;
   private String fullName;
   private String avatar;
+  private Boolean isAdmin;
 
   // Private constructor untuk mencegah pembuatan objek secara langsung
   private LoggedUserModel() {
@@ -19,10 +20,11 @@ public class LoggedUserModel {
   }
 
   // Setter untuk mengatur informasi pengguna yang sedang login
-  public void setUser(String username, String fullName, String avatar) {
+  public void setUser(String username, String fullName, String avatar, Boolean isAdmin) {
     this.username = username;
     this.fullName = fullName;
     this.avatar = avatar;
+    this.isAdmin = isAdmin;
   }
 
   // Getter untuk mendapatkan username pengguna yang sedang login
@@ -50,4 +52,7 @@ public class LoggedUserModel {
     return username != null && fullName != null && avatar != null;
   }
 
+  public Boolean isAdmin() {
+    return isAdmin;
+  }
 }

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -75,13 +76,19 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <ImageView fx:id="imagePreview" fitHeight="278.0" fitWidth="186.0" layoutX="245.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagePreview" fitHeight="209.0" fitWidth="186.0" layoutX="245.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="313.0" layoutY="381.0" text="PREVIEW">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <Button layoutX="38.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleUploadImage" prefHeight="26.0" prefWidth="191.0" text="Upload Gambar Produk" />
+            <ColorPicker fx:id="inputColor" layoutX="249.0" layoutY="103.0" prefHeight="34.0" prefWidth="164.0" />
+            <Label layoutX="249.0" layoutY="74.0" text="Background Color">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Button layoutX="29.0" layoutY="51.0" mnemonicParsing="false" onAction="#handleBackIntoMenu" prefHeight="26.0" prefWidth="142.0" text="Back to Menu">

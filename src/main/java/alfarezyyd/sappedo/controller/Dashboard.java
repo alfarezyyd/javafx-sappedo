@@ -47,6 +47,10 @@ public class Dashboard {
   public Label nameLabel;
   @FXML
   public HBox logoutButton;
+  @FXML
+  public HBox hboxOrder;
+  @FXML
+  public HBox hboxUser;
 
   @FXML
   private Label dateNow;
@@ -209,12 +213,18 @@ public class Dashboard {
     totalUser.setText(String.valueOf(totalUsers));
     LoggedUserModel loggedUserModel = LoggedUserModel.getInstance();
 
-    if (loggedUserModel.isLoggedIn()) {
-      nameLabel.setText("Halo, " + loggedUserModel.getFullName());
-      File file = new File(String.valueOf(loggedUserModel.getAvatar()));
-      Image image = new Image(file.toURI().toString());
-      avatarUser.setImage(image);
+    if (!loggedUserModel.isAdmin()) {
+      hboxProduct.setVisible(false);
+      hboxOrder.setVisible(false);
+      hboxUser.setVisible(false);
     }
+    nameLabel.setText("Halo, " + loggedUserModel.getFullName());
+    File file = new File(String.valueOf(loggedUserModel.getAvatar()));
+    Image image = new Image(file.toURI().toString());
+    System.out.println(loggedUserModel.getAvatar());
+    System.out.print(file.toURI().toString());
+    avatarUser.setImage(image);
+
   }
 
   // Metode untuk mendapatkan total produk dari database
@@ -261,7 +271,8 @@ public class Dashboard {
         int stock = resultSet.getInt("stock");
         int id = resultSet.getInt("id");
         String imagePath = resultSet.getString("image_path");
-        BicycleModel bicycleModel = new BicycleModel(null, name, price, stock, id, imagePath);
+
+        BicycleModel bicycleModel = new BicycleModel(null, name, price, stock, id, imagePath, null);
         topProducts.add(bicycleModel);
       }
     } catch (SQLException e) {

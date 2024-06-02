@@ -9,13 +9,14 @@ public class BicycleModel {
   private String imagePath;
   private String color;
 
-  public BicycleModel(Integer id, String name, Integer price, Integer stock, Integer modelId, String imagePath) {
+  public BicycleModel(Integer id, String name, Integer price, Integer stock, Integer modelId, String imagePath, String color) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.stock = stock;
     this.modelId = modelId;
     this.imagePath = imagePath;
+    this.color = color;
   }
 
   public Integer getId() {
@@ -44,10 +45,6 @@ public class BicycleModel {
 
   public String getColor() {
     return color;
-  }
-
-  public void setColor(String color) {
-    this.color = color;
   }
 
   @Override

@@ -72,7 +72,8 @@ public class Market implements Initializable {
         int stock = resultSet.getInt("stock");
         int id = resultSet.getInt("id");
         String imagePath = resultSet.getString("image_path");
-        BicycleModel bicycleModel = new BicycleModel(id, name, price, stock, id, imagePath);
+        String color = resultSet.getString("bg_color");
+        BicycleModel bicycleModel = new BicycleModel(id, name, price, stock, id, imagePath, color);
         bicycleObservableList.add(bicycleModel);
       }
     } catch (SQLException e) {
@@ -83,11 +84,12 @@ public class Market implements Initializable {
   private void setChosenBicycle(BicycleModel bicycleModel) {
     bicycleNameLabel.setText(bicycleModel.getName());
     bicyclePriceLabel.setText(Launcher.CURRENCY + bicycleModel.getPrice());
+
     File file = new File(String.valueOf(bicycleModel.getImagePath()));
     bicycleImage = new Image(file.toURI().toString());
     bicycleImg.setImage(bicycleImage);
     bicycleStockLabel.setText(String.valueOf(bicycleModel.getStock()));
-    chosenBicycleCard.setStyle("-fx-background-color: #" + "FB5D03" + ";\n" +
+    chosenBicycleCard.setStyle("-fx-background-color: #" + bicycleModel.getColor().substring(4) + ";\n" +
         "    -fx-background-radius: 30;");
   }
 

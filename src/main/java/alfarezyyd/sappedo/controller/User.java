@@ -75,7 +75,9 @@ public class User {
         inputConfirmationPassword.setText(selectedUser.getPassword());
         userId = selectedUser.getId();
         userAvatar = selectedUser.getAvatar();
-        imagePreview.setImage(new Image(selectedUser.getAvatar()));
+        File file = new File(String.valueOf(selectedUser.getAvatar()));
+
+        imagePreview.setImage(new Image(file.toURI().toString()));
       }
     });
 
@@ -94,8 +96,9 @@ public class User {
         String fullName = resultSet.getString("full_name");
         String password = resultSet.getString("password");
         String avatar = resultSet.getString("avatar");
+        Boolean isAdmin = resultSet.getBoolean("is_admin");
 
-        UserModel user = new UserModel(id, username, fullName, password, avatar);
+        UserModel user = new UserModel(id, username, fullName, password, avatar, isAdmin);
         userObservableList.add(user);
       }
     } catch (SQLException e) {
@@ -120,36 +123,23 @@ public class User {
       return;
     }
 
-
-    byte[] hashedPassword = null;
-    try {
-      SecureRandom random = new SecureRandom();
-      byte[] salt = new byte[16];
-      random.nextBytes(salt);
-      MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
-      messageDigest.update(salt);
-      hashedPassword = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-    } catch (NoSuchAlgorithmException e) {
-      CommonHelper.showAlert("Error", "Terjadi error yang tidak terduga", Alert.AlertType.ERROR);
-    }
     try (Connection connection = AppConnection.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (username, full_name, password, avatar) VALUES (?, ?, ?, ?)");
       preparedStatement.setString(1, username);
       preparedStatement.setString(2, fullName);
-      preparedStatement.setString(3, Arrays.toString(hashedPassword));
+      preparedStatement.setString(3, password);
       preparedStatement.setString(4, userAvatar);
       int i = preparedStatement.executeUpdate();
       if (i > 0) {
         CommonHelper.showAlert("Success", "Pengguna berhasil ditambahkan", Alert.AlertType.INFORMATION);
-        UserModel newUser = new UserModel(null, username, fullName, password, userAvatar);
+        UserModel newUser = new UserModel(null, username, fullName, password, userAvatar, false);
         userObservableList.add(newUser);
         tableViewTransaction.refresh();
       } else {
         CommonHelper.showAlert("Error", "Pengguna gagal ditambahkan", Alert.AlertType.ERROR);
       }
     } catch (SQLException e) {
-      CommonHelper.showAlert("Error", "Aplikasi mengalami error tidak terduga", Alert.AlertType.ERROR);
+      CommonHelper.showAlert("Error", "Aplikasi mengalami error tidak terduga" + e.getMessage(), Alert.AlertType.ERROR);
     }
   }
 
@@ -180,7 +170,7 @@ public class User {
       int i = preparedStatement.executeUpdate();
       if (i > 0) {
         CommonHelper.showAlert("Success", "Pengguna berhasil diperbarui", Alert.AlertType.INFORMATION);
-        UserModel updatedUser = new UserModel(userId, username, fullName, password, userAvatar);
+        UserModel updatedUser = new UserModel(userId, username, fullName, password, userAvatar, false);
         for (int index = 0; index < userObservableList.size(); index++) {
           if (userObservableList.get(index).getId().equals(userId)) {
             userObservableList.set(index, updatedUser);

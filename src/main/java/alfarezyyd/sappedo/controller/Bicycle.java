@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -51,6 +48,8 @@ public class Bicycle {
   private final ObservableList<BicycleModel> bicycleObservableList = FXCollections.observableArrayList();
   @FXML
   public ImageView imagePreview;
+  @FXML
+  public ColorPicker inputColor;
   private Integer bicycleId;
   private String imagePath;
   int counterInc = 1;
@@ -96,7 +95,7 @@ public class Bicycle {
         int stock = resultSet.getInt("stock");
         int id = resultSet.getInt("id");
         String imagePath = resultSet.getString("image_path");
-        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock, id, imagePath);
+        BicycleModel bicycle = new BicycleModel(counterInc, name, price, stock, id, imagePath, null);
         bicycleObservableList.add(bicycle);
         counterInc++;
       }
@@ -111,6 +110,7 @@ public class Bicycle {
     String name = inputName.getText().trim();
     String priceText = inputPrice.getText().trim();
     String stockText = inputStock.getText().trim();
+    String colorPicker = inputColor.getValue().toString();
     if (imagePath == null) {
       CommonHelper.showAlert("Error", "Tolong upload gambar terlebih dahulu", Alert.AlertType.ERROR);
     }
@@ -122,11 +122,12 @@ public class Bicycle {
     try (Connection connection = AppConnection.getConnection()) {
       price = Integer.parseInt(priceText);
       stock = Integer.parseInt(stockText);
-      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock, image_path) VALUES (?,?,?, ?)", Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO bicycles (name, price, stock, image_path, bg_color) VALUES (?,?,?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, price);
       preparedStatement.setInt(3, stock);
       preparedStatement.setString(4, imagePath);
+      preparedStatement.setString(5, colorPicker);
       int i = preparedStatement.executeUpdate();
       ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
       if (i > 0) {
@@ -135,7 +136,7 @@ public class Bicycle {
           bicycleId = generatedKeys.getInt(1);
         }
         // Tambahkan data baru ke dalam ObservableList
-        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath);
+        BicycleModel newBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath, null);
         bicycleObservableList.add(newBicycle);
 
         // Perbarui TableView
@@ -156,6 +157,7 @@ public class Bicycle {
     String name = inputName.getText().trim();
     String priceText = inputPrice.getText().trim();
     String stockText = inputStock.getText().trim();
+    String colorPicker = inputColor.getValue().toString();
     if (name.isEmpty() || priceText.isEmpty() || stockText.isEmpty()) {
       CommonHelper.showAlert("Error", "Semua kolom wajib terisi", Alert.AlertType.ERROR);
       return;
@@ -167,16 +169,17 @@ public class Bicycle {
       }
       price = Integer.parseInt(priceText);
       stock = Integer.parseInt(stockText);
-      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE bicycles SET name = ?, price = ?, stock = ?, image_path = ? WHERE id = ?");
+      PreparedStatement preparedStatement = connection.prepareStatement("UPDATE bicycles SET name = ?, price = ?, stock = ?, image_path = ?, bg_color = ? WHERE id = ?");
       preparedStatement.setString(1, name);
       preparedStatement.setInt(2, price);
       preparedStatement.setInt(3, stock);
       preparedStatement.setString(4, imagePath);
       preparedStatement.setInt(5, bicycleId);
+      preparedStatement.setString(6, colorPicker);
       int i = preparedStatement.executeUpdate();
       if (i > 0) {
         CommonHelper.showAlert("Success", "Data sepeda berhasil diupdate", Alert.AlertType.INFORMATION);
-        BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath);
+        BicycleModel updatedBicycle = new BicycleModel(counterInc++, name, price, stock, bicycleId, imagePath, null);
 
         for (int index = 0; index < bicycleObservableList.size(); index++) {
           if (bicycleObservableList.get(index).getId().equals(bicycleId)) {
