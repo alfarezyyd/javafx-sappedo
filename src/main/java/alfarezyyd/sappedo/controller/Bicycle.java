@@ -276,7 +276,7 @@ public class Bicycle {
       jasperPrint = JasperFillManager.fillReport("report/BicycleReport.jasper",
           new HashMap<>(),
           AppConnection.getConnection());
-      JasperViewer jasperViewer = new JasperViewer(jasperPrint, true);
+      JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
       jasperViewer.setTitle("Laporan Data Sepeda");
       jasperViewer.setVisible(true);
     } catch (JRException | SQLException e) {

@@ -375,7 +375,7 @@ public class Transaction {
       jasperPrint = JasperFillManager.fillReport("report/TransactionReport.jasper",
           new HashMap<>(),
           AppConnection.getConnection());
-      JasperViewer jasperViewer = new JasperViewer(jasperPrint, true);
+      JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
       jasperViewer.setTitle("Laporan Data Pengguna");
       jasperViewer.setVisible(true);
     } catch (JRException | SQLException e) {
