@@ -221,8 +221,6 @@ public class Dashboard {
     nameLabel.setText("Halo, " + loggedUserModel.getFullName());
     File file = new File(String.valueOf(loggedUserModel.getAvatar()));
     Image image = new Image(file.toURI().toString());
-    System.out.println(loggedUserModel.getAvatar());
-    System.out.print(file.toURI().toString());
     avatarUser.setImage(image);
 
   }
