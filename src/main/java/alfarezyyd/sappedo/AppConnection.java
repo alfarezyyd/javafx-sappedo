@@ -12,7 +12,7 @@ public class AppConnection {
 
 
   public static Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(AppConnection.jdbcUrl, "root", "");
+    return DriverManager.getConnection(AppConnection.jdbcUrl, "root", "root");
   }
 
   public static void initializeConnection() {

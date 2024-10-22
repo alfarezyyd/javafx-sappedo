@@ -126,6 +126,13 @@ public class Transaction {
       }
     });
 
+    // Listener untuk mendeteksi perubahan nilai
+    comboBoxProduct.valueProperty().addListener((observable, oldValue, newValue) -> {
+      File file = new File(String.valueOf(newValue.getImagePath()));
+      imagePreview.setImage(new Image(file.toURI().toString()));
+
+    });
+
     comboBoxProduct.setConverter(new StringConverter<>() {
       @Override
       public String toString(BicycleModel object) {
@@ -171,7 +178,8 @@ public class Transaction {
         String name = resultSet.getString("name");
         int price = resultSet.getInt("price");
         int stock = resultSet.getInt("stock");
-        BicycleModel bicycle = new BicycleModel(id, name, price, stock, id, null, null);
+        String imagePath = resultSet.getString("image_path");
+        BicycleModel bicycle = new BicycleModel(id, name, price, stock, id, imagePath, null);
         bicycleObservableList.add(bicycle);
       }
 
